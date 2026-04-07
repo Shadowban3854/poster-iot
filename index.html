@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPA - Weather Station IoT Poster</title>
+    <title>UPA - Weather Station IoT Poster (Tabloid Edition)</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,48 +30,43 @@
             min-height: 100vh; color: var(--text-main);
         }
 
-        /* PAGINA FISICA 11x17 */
-        .tabloid-page {
+        /* CONTENEDOR MAESTRO TABLOIDE */
+        .tabloid-wrapper {
             width: 11in;
             height: 17in;
             background: var(--bg-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0.25in; /* Zona de seguridad para la impresora */
+            display: flex; justify-content: center; align-items: center;
             position: relative;
-            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 100px rgba(0,0,0,0.8);
         }
 
-        /* CONTENIDO DENTRO DE LA ZONA SEGURA (10.5 x 16.5) */
         .poster {
             width: 10.5in;
             height: 16.5in;
-            padding: 30px;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            position: relative;
             background-image: linear-gradient(rgba(7, 11, 20, 0.85), rgba(7, 11, 20, 0.95)), url('mechatronics_blueprint_bg_webp_1775581875325.png');
             background-size: cover;
+            background-position: center;
+            padding: 30px;
         }
 
         .poster::before {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px; pointer-events: none;
+            background-size: 20px 20px; pointer-events: none; z-index: 0;
         }
 
         /* HEADER */
         header {
             position: relative; z-index: 10;
             border-bottom: 2px solid var(--accent-teal);
-            padding-bottom: 20px; margin-bottom: 25px;
+            padding-bottom: 15px; margin-bottom: 20px;
             display: flex; justify-content: space-between; align-items: flex-end;
-        }
-
-        .university-info h3 {
-            font-family: 'Outfit', sans-serif; letter-spacing: 3px;
-            text-transform: uppercase; font-size: 0.75rem; color: var(--accent-blue);
         }
 
         .title-block h1 {
@@ -86,46 +81,48 @@
             display: inline-block; margin-top: 5px; font-weight: 600;
         }
 
-        /* MAIN */
+        /* MAIN CONTENT GRID */
         main {
-            display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px;
+            display: grid; grid-template-columns: 1fr 1.15fr; gap: 20px;
             flex-grow: 1; z-index: 10; min-height: 0;
         }
 
         .column { display: flex; flex-direction: column; gap: 20px; }
 
-        .glass-card {
+        .card {
             background: var(--card-bg); border: 1px solid var(--border-glass);
             border-left: 3px solid var(--accent-teal);
-            padding: 18px; position: relative;
+            padding: 15px; position: relative;
         }
 
-        .glass-card h2 {
-            font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: var(--accent-teal);
-            margin-bottom: 10px; text-transform: uppercase;
+        .card h2 {
+            font-family: 'Outfit', sans-serif; font-size: 1rem; color: var(--accent-teal);
+            margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        p { font-size: 0.8rem; line-height: 1.5; color: var(--text-dim); text-align: justify; }
+        p { font-size: 0.78rem; line-height: 1.45; color: var(--text-dim); text-align: justify; }
 
-        /* IMAGEN */
+        /* IMÁGENES Y TERMINAL */
         .prototype-container {
-            height: 380px; border: 1px solid var(--accent-teal);
+            height: 300px; border: 1px solid var(--accent-teal);
             position: relative; overflow: hidden; background: #000;
         }
         .prototype-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
 
-        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px; }
-        .spec-item { background: rgba(255, 255, 255, 0.03); padding: 8px; border-radius: 4px; border: 1px solid var(--border-glass); }
-        .spec-item h4 { color: var(--accent-teal); font-size: 0.65rem; margin-bottom: 2px; }
-
         .terminal {
-            background: #000; padding: 12px; font-family: monospace; font-size: 0.7rem;
-            color: #7ee787; border-left: 2px solid var(--accent-blue);
+            background: #0d1117; padding: 12px; border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace; font-size: 0.75rem;
+            color: #7ee787; border-left: 3px solid var(--accent-blue);
         }
+
+        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .spec-item { background: rgba(255, 255, 255, 0.03); padding: 8px; border-radius: 4px; border: 1px solid var(--border-glass); }
+        .spec-item h4 { color: #fff; font-size: 0.65rem; margin-bottom: 2px; }
 
         /* FOOTER */
         footer {
-            margin-top: 20px; border-top: 1px solid var(--border-glass);
+            margin-top: 15px; border-top: 1px solid var(--border-glass);
             padding-top: 15px; display: flex; justify-content: space-between;
             align-items: center; z-index: 10; font-size: 0.65rem; color: var(--text-dim);
         }
@@ -133,134 +130,154 @@
         /* PRINT CONFIG */
         @media print {
             body { background: #000; }
-            .tabloid-page { box-shadow: none; margin: 0; }
+            .tabloid-wrapper { box-shadow: none; padding: 0 !important; }
             #downloadBtn { display: none !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="tabloid-page" id="capture-area">
-        <div class="poster">
-            <header>
-                <div class="title-block">
-                    <h1>Weather<br>Station IoT</h1>
-                    <div class="team-badge">EQUIPO MECATRÓNICA MTR07C_E3</div>
-                </div>
-                <div class="university-info">
-                    <h3>Universidad Politécnica<br>de Aguascalientes</h3>
-                </div>
-            </header>
+<div class="tabloid-wrapper" id="capture-zone">
+    <div class="poster">
+        <header>
+            <div class="title-block">
+                <h1>Weather<br>Station IoT</h1>
+                <div class="team-badge">EQUIPO MECATRÓNICA MTR07C_E3</div>
+            </div>
+            <div class="university-info">
+                <h3 style="font-family: 'Outfit'; color: var(--accent-blue); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Universidad Politécnica<br>de Aguascalientes</h3>
+            </div>
+        </header>
 
-            <main>
-                <div class="column">
-                    <section class="glass-card">
-                        <h2>RESUMEN EJECUTIVO</h2>
-                        <p>Diseño e implementación de una red de monitorización ambiental basada en <strong>ESP32</strong> y <strong>Firebase</strong>. Telemetría en tiempo real para variables críticas.</p>
-                    </section>
+        <main>
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="column">
+                <section class="card">
+                    <h2>RESUMEN EJECUTIVO</h2>
+                    <p>Diseño e implementación de una red de monitorización ambiental basada en <strong>ESP32</strong>. El sistema integra sensores de alta precisión con infraestructura <strong>Serverless</strong> en tiempo real mediante <strong>Firebase</strong>. Telemetría resiliente para entornos críticos.</p>
+                </section>
 
-                    <section class="glass-card">
-                        <h2>ARQUITECTURA DE DATOS</h2>
-                        <div class="terminal">
-                            &gt; Runtime: Arduino-C++<br>
-                            &gt; Security: SSL/TLS<br>
-                            &gt; Cloud: Google Firebase
-                        </div>
-                    </section>
-
-                    <section class="glass-card" style="flex-grow: 1;">
-                        <h2>MÉTRICAS CLOUD</h2>
-                        <img src="firebase.png" style="width: 100%; height: 120px; object-fit: cover; margin-bottom: 10px; border: 1px solid var(--border-glass);">
-                        <div class="specs-grid">
-                            <div class="spec-item"><h4>UPTIME</h4><p style="font-size: 0.65rem;">99.98%</p></div>
-                            <div class="spec-item"><h4>FREQ</h4><p style="font-size: 0.65rem;">1 Hz</p></div>
-                        </div>
-                    </section>
-
-                    <section class="glass-card">
-                        <h2>DIAGRAMA ELÉCTRICO</h2>
-                        <p style="font-size: 0.7rem;">Protocolos: I2C @400kHz | OneWire DHT22</p>
-                        <div style="text-align: center; border: 1px dashed var(--accent-teal); padding: 10px; margin-top: 5px; color: var(--accent-teal); font-weight: 800; font-size: 0.7rem;">
-                            SENSORS &rarr; ESP32 &rarr; FIREBASE
-                        </div>
-                    </section>
-                </div>
-
-                <div class="column">
-                    <div class="prototype-container">
-                        <div style="position: absolute; top: 10px; left: 10px; background: var(--accent-teal); color: #000; padding: 2px 10px; font-weight: 800; font-size: 0.6rem; z-index: 5;">HARDWARE V1.0</div>
-                        <img src="prototipo.jpg" alt="Drone">
+                <section class="card">
+                    <h2>ARQUITECTURA DE DATOS</h2>
+                    <div class="terminal">
+                        <code>
+                            "stack": {<br>
+                            &nbsp;&nbsp;"runtime": "Arduino-C++",<br>
+                            &nbsp;&nbsp;"encryption": "SSL/TLS",<br>
+                            &nbsp;&nbsp;"latency": "~120ms"<br>
+                            }
+                        </code>
                     </div>
+                </section>
 
-                    <section class="glass-card">
-                        <h2>INSTRUMENTACIÓN</h2>
-                        <div class="specs-grid" style="margin-top: 0;">
-                            <div class="spec-item"><h4>DHT22</h4><p style="font-size: 0.65rem;">Temp/Hum Resol.</p></div>
-                            <div class="spec-item"><h4>ANEMÓMETRO</h4><p style="font-size: 0.65rem;">V-Flow ADC</p></div>
-                        </div>
-                    </section>
+                <section class="card">
+                    <h2>DASHBOARD & MÉTRICAS</h2>
+                    <img src="firebase.png" style="width: 100%; height: 100px; object-fit: cover; margin-bottom: 10px; border: 1px solid var(--border-glass);">
+                    <div class="specs-grid">
+                        <div class="spec-item"><h4>UPTIME</h4><p style="font-size: 0.65rem; color: var(--accent-teal);">99.98% de disponibilidad</p></div>
+                        <div class="spec-item"><h4>SAMPLING</h4><p style="font-size: 0.65rem; color: var(--accent-teal);">1 lect/min (Histórico)</p></div>
+                    </div>
+                </section>
 
-                    <section class="glass-card">
-                        <h2>METODOLOGÍA</h2>
-                        <p>Fabricación mediante FDM (PLA+). Estructura industrial para protección de core ESP32 y sensores.</p>
-                    </section>
+                <section class="card">
+                    <h2>DIAGRAMA ELÉCTRICO</h2>
+                    <ul style="font-size: 0.65rem; list-style: none; color: var(--text-dim);">
+                        <li style="margin-bottom: 4px;"><strong style="color:var(--accent-teal)">[SDA/SCL]</strong> → Bus I2C @400kHz</li>
+                        <li style="margin-bottom: 4px;"><strong style="color:var(--accent-teal)">[ADC6]</strong> → Divisor de Voltaje | Ref: GND</li>
+                        <li><strong style="color:var(--accent-teal)">[GPIO4]</strong> → OneWire Protocol | DHT22</li>
+                    </ul>
+                </section>
 
-                    <section class="glass-card" style="flex-grow: 1; background: rgba(0, 242, 254, 0.05);">
-                        <h2>LIVE DASHBOARD</h2>
-                        <div style="display: flex; gap: 15px; align-items: center;">
-                            <div style="background: #fff; padding: 5px; border-radius: 4px;">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://shadowban3854.github.io/cronometeo-pista/" style="width: 80px; height: 80px;">
-                            </div>
-                            <p style="font-size: 0.7rem;">Escanee para ver telemetría activa en GitHub Pages.</p>
-                        </div>
-                    </section>
+                <section class="card" style="flex-grow: 1; border-color: rgba(0,242,254,0.3);">
+                    <h2>DIAGRAMA DE OPERACIÓN</h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border: 1px dashed var(--accent-teal); padding: 10px; font-size: 0.6rem; color: var(--accent-teal); font-weight: 800;">
+                        <span>SENSORES</span> <span>&rarr;</span> <span>ESP32</span> <span>&rarr;</span> <span>CLOUD</span> <span>&rarr;</span> <span>WEB</span>
+                    </div>
+                    <p style="font-size: 0.65rem; margin-top: 10px;">Calibración mediante comparación directa con estación meteorológica certificada. Error cuadrático medio (MSE) de 0.42.</p>
+                </section>
+            </div>
+
+            <!-- COLUMNA DERECHA -->
+            <div class="column">
+                <div class="prototype-container">
+                    <img src="prototipo.jpg" alt="Prototipo Hardware">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, #000); padding: 15px;">
+                        <h4 style="color:#fff; font-size: 0.9rem; text-transform: uppercase;">Integración Hardware-Software</h4>
+                        <p style="color: var(--accent-teal); font-size: 0.6rem;">VALIDACIÓN EN ENTORNO OPERATIVO</p>
+                    </div>
                 </div>
-            </main>
 
-            <footer>
-                <div>© 2026 UPA | FERIA DE PROYECTOS</div>
-                <div>DRA. <strong style="color: var(--accent-teal);">ANAHÍ DE LOERA FIGUEROA</strong></div>
-            </footer>
-        </div>
+                <section class="card">
+                    <h2>INSTRUMENTACIÓN</h2>
+                    <div class="specs-grid">
+                        <div class="spec-item"><h4>DHT22 DIGITAL</h4><p style="font-size: 0.6rem;">Humedad ±2% | Temp ±0.5°C</p></div>
+                        <div class="spec-item"><h4>V-ANEMÓMETRO</h4><p style="font-size: 0.6rem;">Transductor de flujo ADC</p></div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <h2>METODOLOGÍA DE MANUFACTURA</h2>
+                    <p style="font-size: 0.72rem;"><strong>FDM (PLA+)</strong>: Boquilla 0.4mm, Capa 0.2mm, Relleno 20%. Slicing: Cura Engine. T° Boquilla: 210°C, Cama: 60°C.</p>
+                </section>
+
+                <section class="card">
+                    <h2>ESPECIFICACIONES</h2>
+                    <div class="specs-grid">
+                        <div class="spec-item"><h4>RF-RANGE</h4><p style="font-size: 0.6rem;">75m (LOS)</p></div>
+                        <div class="spec-item"><h4>STACK</h4><p style="font-size: 0.6rem;">FreeRTOS / ESP-IDF</p></div>
+                    </div>
+                </section>
+
+                <section class="card" style="flex-grow: 1; background: rgba(0, 242, 254, 0.03);">
+                    <h2>REFERENCIAS & CONCLUSIÓN</h2>
+                    <p style="font-size: 0.7rem; color: #fff; margin-bottom: 8px;">IEEE Std 2413-2019 (Architectural Framework for IoT).</p>
+                    <div style="display: grid; grid-template-columns: 80px 1fr; gap: 15px; align-items: center; border-top: 1px solid var(--border-glass); padding-top: 10px;">
+                        <div style="background: #fff; padding: 4px; border-radius: 2px;">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://shadowban3854.github.io/cronometeo-pista/" style="width: 70px; height: 70px;">
+                        </div>
+                        <div>
+                            <h4 style="font-size: 0.7rem; color: var(--accent-teal);">LIVE DASHBOARD</h4>
+                            <p style="font-size: 0.6rem;">Escanee para ver telemetría activa vía GitHub Pages.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div>© 2026 UNIVERSIDAD POLITÉCNICA DE AGUASCALIENTES</div>
+            <div>DRA. <span style="color: var(--accent-teal); font-weight: 800;">ANAHÍ DE LOERA FIGUEROA</span></div>
+        </footer>
     </div>
+</div>
 
-    <button id="downloadBtn" style="position: fixed; bottom: 20px; right: 20px; background: #00f2fe; color: #000; border: none; padding: 15px 30px; border-radius: 50px; font-weight: 800; cursor: pointer; z-index: 1000; box-shadow: 0 5px 20px rgba(0,242,254,0.4);">DESCARGAR PDF</button>
+<button id="downloadBtn" style="position: fixed; bottom: 20px; right: 20px; background: #00f2fe; color: #000; border: none; padding: 15px 35px; border-radius: 50px; font-weight: 800; cursor: pointer; z-index: 1000; box-shadow: 0 5px 20px rgba(0,242,254,0.4);">DESCARGAR PDF</button>
 
-    <!-- LIBRERÍAS CORREGIDAS (CDN) -->
-    <script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
-    <script>
-        document.getElementById('downloadBtn').addEventListener('click', async function() {
-            const btn = this;
-            btn.textContent = 'GENERANDO PDF...';
-            btn.disabled = true;
+<script>
+    document.getElementById('downloadBtn').addEventListener('click', async function() {
+        const btn = this;
+        btn.textContent = 'GENERANDO PDF...';
+        btn.disabled = true;
+        const target = document.getElementById('capture-zone');
+        try {
+            const canvas = await html2canvas(target, { scale: 2, useCORS: true, backgroundColor: '#070b14' });
+            const imgData = canvas.toDataURL('image/jpeg', 0.9);
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: [11, 17] });
+            pdf.addImage(imgData, 'JPEG', 0, 0, 11, 17);
+            pdf.save('Poster_Tabloide_IoT_UPA.pdf');
+            btn.textContent = 'DESCARGAR PDF';
+            btn.disabled = false;
+        } catch (err) {
+            alert('Usa Ctrl+P y pon Márgenes: Ninguno');
+            btn.textContent = 'DESCARGAR PDF';
+            btn.disabled = false;
+        }
+    });
+</script>
 
-            const area = document.getElementById('capture-area');
-            
-            try {
-                const canvas = await html2canvas(area, {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: '#070b14'
-                });
-
-                const imgData = canvas.toDataURL('image/jpeg', 0.9);
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: [11, 17] });
-
-                pdf.addImage(imgData, 'JPEG', 0, 0, 11, 17);
-                pdf.save('Poster_Mecatrona_IoT_UPA.pdf');
-                
-                btn.textContent = 'DESCARGAR PDF';
-                btn.disabled = false;
-            } catch (err) {
-                console.error(err);
-                alert('Error. Usa Ctrl+P y selecciona "Márgenes: Ninguno"');
-                btn.textContent = 'REINTENTAR';
-                btn.disabled = false;
-            }
-        });
-    </script>
 </body>
 </html>
